@@ -27,3 +27,18 @@ blockchain = [
 # Anthony's KelloggCoin balance is 2650
 
 # 👇👇👇 Your code HERE 👇👇👇
+
+balances = Hash.new(0)
+
+blockchain.each do |tx|
+  from = tx["from_user"]
+  to = tx["to_user"]
+  amount = tx["amount"]
+
+  balances[from] -= amount if from
+  balances[to] += amount
+end
+
+%w[ben brian evan anthony].each do |user|
+  puts "#{user.capitalize}'s KelloggCoin balance is #{balances[user]}"
+end
